@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recibo de Pago - {{ reservation_code }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 12pt;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #007bff;
+            margin: 0;
+            font-size: 28pt;
+        }
+        
+        .header p {
+            margin: 5px 0;
+            color: #666;
+        }
+        
+        .receipt-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .receipt-info h2 {
+            margin: 0 0 10px 0;
+            color: #007bff;
+            font-size: 18pt;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section h3 {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            margin: 0 0 15px 0;
+            font-size: 14pt;
+        }
+        
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        
+        .details-table td {
+            padding: 8px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .details-table td:first-child {
+            font-weight: bold;
+            width: 40%;
+            color: #555;
+        }
+        
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .pricing-table tr {
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .pricing-table td {
+            padding: 10px;
+        }
+        
+        .pricing-table td:first-child {
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .pricing-table td:last-child {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .pricing-table .total-row {
+            background-color: #007bff;
+            color: white;
+            font-size: 14pt;
+            font-weight: bold;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #dee2e6;
+            text-align: center;
+            font-size: 10pt;
+            color: #666;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        
+        .status-confirmed {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .status-paid {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>{{ company_name }}</h1>
+        <p>{{ company_address }}</p>
+        <p>Email: {{ company_email }} | Tel: {{ company_phone }}</p>
+    </div>
+    
+    <!-- Receipt Info -->
+    <div class="receipt-info">
+        <h2>RECIBO DE PAGO</h2>
+        <div class="info-row">
+            <span class="info-label">Número de Recibo:</span>
+            <span>{{ receipt_number }}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Fecha de Emisión:</span>
+            <span>{{ receipt_date }}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Código de Reserva:</span>
+            <span><strong>{{ reservation_code }}</strong></span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Confirmación Supplier:</span>
+            <span><strong>{{ supplier_confirmation }}</strong></span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Estado:</span>
+            <span>
+                <span class="status-badge status-{{ status|lower }}">{{ status }}</span>
+                <span class="status-badge status-{{ payment_status|lower }}">{{ payment_status }}</span>
+            </span>
+        </div>
+    </div>
+    
+    <!-- Customer Information -->
+    <div class="section">
+        <h3>Información del Cliente</h3>
+        <table class="details-table">
+            <tr>
+                <td>Nombre:</td>
+                <td>{{ customer_name }}</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>{{ customer_email }}</td>
+            </tr>
+            <tr>
+                <td>Teléfono:</td>
+                <td>{{ customer_phone }}</td>
+            </tr>
+        </table>
+    </div>
+    
+    <!-- Rental Details -->
+    <div class="section">
+        <h3>Detalles de la Reserva</h3>
+        <table class="details-table">
+            <tr>
+                <td>Proveedor:</td>
+                <td>{{ supplier_name }}</td>
+            </tr>
+            <tr>
+                <td>Vehículo:</td>
+                <td>{{ vehicle_category }} ({{ acriss_code }})</td>
+            </tr>
+            <tr>
+                <td>Recogida:</td>
+                <td>{{ pickup_location }} - {{ pickup_datetime }}</td>
+            </tr>
+            <tr>
+                <td>Devolución:</td>
+                <td>{{ dropoff_location }} - {{ dropoff_datetime }}</td>
+            </tr>
+            <tr>
+                <td>Días de Renta:</td>
+                <td>{{ rental_days }} días</td>
+            </tr>
+        </table>
+    </div>
+    
+    <!-- Payment Information -->
+    <div class="section">
+        <h3>Información de Pago</h3>
+        <table class="details-table">
+            <tr>
+                <td>Método de Pago:</td>
+                <td>{{ payment_method }}</td>
+            </tr>
+            <tr>
+                <td>Fecha de Pago:</td>
+                <td>{{ payment_date }}</td>
+            </tr>
+            <tr>
+                <td>ID de Transacción:</td>
+                <td>{{ transaction_id }}</td>
+            </tr>
+            <tr>
+                <td>Payment Intent ID:</td>
+                <td>{{ payment_id }}</td>
+            </tr>
+        </table>
+    </div>
+    
+    <!-- Pricing Breakdown -->
+    <div class="section">
+        <h3>Desglose de Precios</h3>
+        <table class="pricing-table">
+            <tr>
+                <td>Subtotal</td>
+                <td>{{ currency }} {{ "%.2f"|format(subtotal) }}</td>
+            </tr>
+            {% if discount > 0 %}
+            <tr>
+                <td>Descuento</td>
+                <td>-{{ currency }} {{ "%.2f"|format(discount) }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>Impuestos</td>
+                <td>{{ currency }} {{ "%.2f"|format(taxes) }}</td>
+            </tr>
+            {% if fees > 0 %}
+            <tr>
+                <td>Cargos Adicionales</td>
+                <td>{{ currency }} {{ "%.2f"|format(fees) }}</td>
+            </tr>
+            {% endif %}
+            <tr class="total-row">
+                <td>TOTAL PAGADO</td>
+                <td>{{ currency }} {{ "%.2f"|format(total) }}</td>
+            </tr>
+        </table>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p><strong>Gracias por su preferencia</strong></p>
+        <p>Este es un recibo electrónico generado automáticamente.</p>
+        <p>Para cualquier consulta, contacte a {{ company_email }}</p>
+        <p style="margin-top: 20px; font-size: 9pt;">
+            Documento generado el {{ receipt_date }}
+        </p>
+    </div>
+</body>
+</html>
+```
+
+---
+
+## ✅ INFRASTRUCTURE LAYER COMPLETADO
+
+Has creado **3 archivos finales** (50-52):
+- ✅ Idempotency Store (MySQL con cleanup)
+- ✅ Receipt Generator (WeasyPrint)
+- ✅ Template HTML profesional
+
+---
+
+## 📊 PROGRESO TOTAL
+```
+✅ Config:            5 archivos
+✅ Domain:           21 archivos  
+✅ Application:      15 archivos
+✅ Infrastructure:
+   - Database:        2 archivos
+   - Repositories:    8 archivos
+   - External:        4 archivos
+   - Idempotency:     1 archivo
+   - Documents:       2 archivos (py + html)
+──────────────────────────────────
+Total:              58 archivos
+
+Falta:
+⏳ Presentation (FastAPI endpoints, schemas, middleware)
+⏳ Workers (Outbox processor, cleanup)
+⏳ DI Container (dependency injection)
+⏳ Main app (entry point)
