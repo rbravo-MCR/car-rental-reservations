@@ -4,9 +4,9 @@ Buscar disponibilidad de vehículos
 """
 import structlog
 
-from application.dto.availability_dto import AvailabilityResultDTO, AvailabilitySearchDTO
-from application.ports.supplier_gateway import SupplierGateway
-from application.ports.unit_of_work import UnitOfWork
+from src.application.dto.availability_dto import AvailabilityResultDTO, AvailabilitySearchDTO
+from src.application.ports.supplier_gateway import SupplierGateway
+from src.application.ports.unit_of_work import UnitOfWork
 
 logger = structlog.get_logger()
 

@@ -6,14 +6,23 @@ from collections.abc import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from infrastructure.persistence.database import async_session_factory
-from infrastructure.persistence.repositories.customer_repo import SQLAlchemyCustomerRepository
-from infrastructure.persistence.repositories.office_repo import SQLAlchemyOfficeRepository
-from infrastructure.persistence.repositories.outbox_repo import SQLAlchemyOutboxRepository
-from infrastructure.persistence.repositories.payment_repo import SQLAlchemyPaymentRepository
-from infrastructure.persistence.repositories.reservation_repo import SQLAlchemyReservationRepository
-from infrastructure.persistence.repositories.supplier_repo import SQLAlchemySupplierRepository
-from infrastructure.persistence.repositories.supplier_request_repo import (
+from src.application.ports.repositories import (
+    CustomerRepository,
+    OfficeRepository,
+    OutboxRepository,
+    PaymentRepository,
+    ReservationRepository,
+    SupplierRepository,
+    SupplierRequestRepository,
+)
+from src.infrastructure.persistence.database import async_session_factory
+from src.infrastructure.persistence.repositories.customer_repo import SQLAlchemyCustomerRepository
+from src.infrastructure.persistence.repositories.office_repo import SQLAlchemyOfficeRepository
+from src.infrastructure.persistence.repositories.outbox_repo import SQLAlchemyOutboxRepository
+from src.infrastructure.persistence.repositories.payment_repo import SQLAlchemyPaymentRepository
+from src.infrastructure.persistence.repositories.reservation_repo import SQLAlchemyReservationRepository
+from src.infrastructure.persistence.repositories.supplier_repo import SQLAlchemySupplierRepository
+from src.infrastructure.persistence.repositories.supplier_request_repo import (
     SQLAlchemySupplierRequestRepository,
 )
 
@@ -59,7 +68,7 @@ class SQLAlchemyUnitOfWork:
             await self.session.rollback()
 
     @property
-    def reservations(self) -> SQLAlchemyReservationRepository:
+    def reservations(self) -> ReservationRepository:
         """Repository de reservas (lazy loading)"""
         if self._reservations is None:
             if self.session is None:
@@ -69,7 +78,7 @@ class SQLAlchemyUnitOfWork:
         return self._reservations
 
     @property
-    def payments(self) -> SQLAlchemyPaymentRepository:
+    def payments(self) -> PaymentRepository:
         """Repository de pagos"""
         if self._payments is None:
             if self.session is None:
@@ -79,7 +88,7 @@ class SQLAlchemyUnitOfWork:
         return self._payments
 
     @property
-    def supplier_requests(self) -> SQLAlchemySupplierRequestRepository:
+    def supplier_requests(self) -> SupplierRequestRepository:
         """Repository de supplier requests"""
         if self._supplier_requests is None:
             if self.session is None:
@@ -90,7 +99,7 @@ class SQLAlchemyUnitOfWork:
         return self._supplier_requests
 
     @property
-    def outbox(self) -> SQLAlchemyOutboxRepository:
+    def outbox(self) -> OutboxRepository:
         """Repository de outbox"""
         if self._outbox is None:
             if self.session is None:
@@ -100,7 +109,7 @@ class SQLAlchemyUnitOfWork:
         return self._outbox
 
     @property
-    def customers(self) -> SQLAlchemyCustomerRepository:
+    def customers(self) -> CustomerRepository:
         """Repository de customers"""
         if self._customers is None:
             if self.session is None:
@@ -110,7 +119,7 @@ class SQLAlchemyUnitOfWork:
         return self._customers
 
     @property
-    def suppliers(self) -> SQLAlchemySupplierRepository:
+    def suppliers(self) -> SupplierRepository:
         """Repository de suppliers"""
         if self._suppliers is None:
             if self.session is None:
@@ -120,7 +129,7 @@ class SQLAlchemyUnitOfWork:
         return self._suppliers
 
     @property
-    def offices(self) -> SQLAlchemyOfficeRepository:
+    def offices(self) -> OfficeRepository:
         """Repository de offices"""
         if self._offices is None:
             if self.session is None:

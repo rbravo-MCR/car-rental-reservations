@@ -4,9 +4,9 @@ Genera recibos en PDF
 """
 from typing import Protocol
 
-from domain.entities.payment import Payment
+from src.domain.entities.payment import Payment
 
-from domain.entities.reservation import Reservation
+from src.domain.entities.reservation import Reservation
 
 
 class ReceiptGenerator(Protocol):

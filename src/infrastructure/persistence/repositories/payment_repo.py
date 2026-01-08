@@ -1,12 +1,12 @@
 """
 Payment Repository Implementation
 """
-from domain.entities.payment import Payment
-from domain.value_objects.reservation_status import PaymentStatus
+from src.domain.entities.payment import Payment
+from src.domain.value_objects.reservation_status import PaymentStatus
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from infrastructure.persistence.models import PaymentModel
+from src.infrastructure.persistence.models import PaymentModel
 
 
 class SQLAlchemyPaymentRepository:

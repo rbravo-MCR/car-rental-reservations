@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from decimal import Decimal
 
-from domain.value_objects.reservation_status import PaymentStatus
+from src.domain.value_objects.reservation_status import PaymentStatus
 
 
 @dataclass

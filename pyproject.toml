@@ -37,10 +37,6 @@ mypy = "^1.13.0"
 ipython = "^8.30.0"
 
 [tool.poetry.scripts]
-dev = "uvicorn src.presentation.main:app --reload --host 0.0.0.0 --port 8000"
-test = "pytest tests/ -v --cov=src"
-worker-outbox = "python -m src.workers.outbox_processor"
-worker-cleanup = "python -m src.workers.cleanup_worker"
 
 [build-system]
 requires = ["poetry-core"]

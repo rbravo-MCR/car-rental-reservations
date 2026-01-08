@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+structlog
+stripe
+weasyprint
+jinja2
+pydantic
+pydantic-settings
+asyncpg

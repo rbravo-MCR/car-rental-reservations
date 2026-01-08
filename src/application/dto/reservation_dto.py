@@ -55,7 +55,7 @@ class CreateReservationDTO:
     @classmethod
     def from_request(cls, request) -> "CreateReservationDTO":
         """Crear DTO desde request de API"""
-        from domain.services.pricing_calculator import PricingCalculator
+        from src.domain.services.pricing_calculator import PricingCalculator
 
         rental_days = PricingCalculator.calculate_rental_days(
             request.pickup_datetime,

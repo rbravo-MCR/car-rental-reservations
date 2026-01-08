@@ -5,9 +5,9 @@ Define contratos que la infraestructura debe implementar
 from datetime import datetime
 from typing import Any, Protocol
 
-from domain.entities.payment import Payment
+from src.domain.entities.payment import Payment
 
-from domain.entities.reservation import Reservation
+from src.domain.entities.reservation import Reservation
 
 
 class ReservationRepository(Protocol):

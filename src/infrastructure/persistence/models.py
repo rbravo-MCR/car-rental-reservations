@@ -22,7 +22,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 
-from infrastructure.persistence.database import Base
+from src.infrastructure.persistence.database import Base
 
 
 class ReservationModel(Base):

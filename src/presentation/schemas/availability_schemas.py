@@ -1,7 +1,7 @@
 """
 Pydantic Schemas for Availability endpoints
 """
-from datetime import datetime
+from datetime import UTC, datetime
 from decimal import Decimal
 
 from pydantic import BaseModel, Field, field_validator
@@ -21,7 +21,7 @@ class AvailabilitySearchRequest(BaseModel):
     @classmethod
     def validate_datetime(cls, v):
         """Validar que fechas sean futuras"""
-        if v < datetime.utcnow():
+        if v < datetime.now(UTC):
             raise ValueError('Datetime must be in the future')
         return v
 

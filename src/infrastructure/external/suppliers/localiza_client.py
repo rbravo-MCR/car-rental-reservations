@@ -6,9 +6,9 @@ from datetime import datetime, timedelta
 from decimal import Decimal
 from typing import Any
 
-from config.settings import get_settings
+from src.config.settings import get_settings
 
-from infrastructure.external.suppliers.base_supplier import BaseSupplierClient
+from src.infrastructure.external.suppliers.base_supplier import BaseSupplierClient
 
 settings = get_settings()
 

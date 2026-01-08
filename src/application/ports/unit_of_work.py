@@ -4,7 +4,7 @@ Patrón para manejar transacciones y coordinar repositorios
 """
 from typing import Protocol
 
-from application.ports.repositories import (
+from src.application.ports.repositories import (
     CustomerRepository,
     OfficeRepository,
     OutboxRepository,

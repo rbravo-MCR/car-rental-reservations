@@ -5,7 +5,7 @@ SQLAlchemy async engine y session factory
 
 from collections.abc import AsyncGenerator
 
-from config.settings import get_settings
+from src.config.settings import get_settings
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
     async_sessionmaker,

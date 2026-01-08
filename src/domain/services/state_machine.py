@@ -2,7 +2,7 @@
 State Machine for Reservation Status
 Define y valida transiciones de estado
 """
-from domain.value_objects.reservation_status import ReservationStatus
+from src.domain.value_objects.reservation_status import ReservationStatus
 
 # Matriz de transiciones permitidas
 ALLOWED_TRANSITIONS: dict[ReservationStatus, list[ReservationStatus]] = {

@@ -12,9 +12,7 @@ class AvailabilitySearchDTO:
     """DTO para búsqueda de disponibilidad"""
 
     pickup_office_id: int
-    pickup_office_code: str
     dropoff_office_id: int
-    dropoff_office_code: str
     pickup_datetime: datetime
     dropoff_datetime: datetime
     driver_age: int | None = None

@@ -2,11 +2,11 @@
 Mappers entre Entities y DTOs
 Convierte entre objetos de dominio y DTOs
 """
-from domain.entities.payment import Payment
+from src.domain.entities.payment import Payment
 
-from application.dto.payment_dto import PaymentResultDTO
-from application.dto.reservation_dto import ReservationResultDTO
-from domain.entities.reservation import Reservation
+from src.application.dto.payment_dto import PaymentResultDTO
+from src.application.dto.reservation_dto import ReservationResultDTO
+from src.domain.entities.reservation import Reservation
 
 
 class ReservationMapper:

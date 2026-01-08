@@ -3,15 +3,21 @@ Global Error Handler Middleware
 Maneja todas las excepciones y retorna responses consistentes
 """
 import structlog
-from domain.exceptions.payment_errors import PaymentFailedError
-from domain.exceptions.reservation_errors import (
-    ReservationError,
-    ReservationNotFoundError,
-)
-from domain.exceptions.supplier_errors import SupplierError
+from typing import TYPE_CHECKING
+
 from fastapi import Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+
+from src.domain.exceptions.payment_errors import PaymentFailedError
+from src.domain.exceptions.reservation_errors import (
+    ReservationError,
+    ReservationNotFoundError,
+)
+from src.domain.exceptions.supplier_errors import SupplierError
+
+if TYPE_CHECKING:
+    from fastapi import FastAPI
 
 logger = structlog.get_logger()
 
@@ -101,3 +107,37 @@ def handle_exception(exc: Exception, request: Request) -> JSONResponse:
             "code": "INTERNAL_ERROR",
         }
     )
+
+
+def setup_exception_handlers(app: "FastAPI") -> None:
+    """
+    Configure global exception handlers for the FastAPI application
+
+    Args:
+        app: FastAPI application instance
+    """
+    @app.exception_handler(ReservationNotFoundError)
+    async def reservation_not_found_handler(request: Request, exc: ReservationNotFoundError):
+        return handle_exception(exc, request)
+
+    @app.exception_handler(PaymentFailedError)
+    async def payment_failed_handler(request: Request, exc: PaymentFailedError):
+        return handle_exception(exc, request)
+
+    @app.exception_handler(SupplierError)
+    async def supplier_error_handler(request: Request, exc: SupplierError):
+        return handle_exception(exc, request)
+
+    @app.exception_handler(ReservationError)
+    async def reservation_error_handler(request: Request, exc: ReservationError):
+        return handle_exception(exc, request)
+
+    @app.exception_handler(RequestValidationError)
+    async def validation_error_handler(request: Request, exc: RequestValidationError):
+        return handle_exception(exc, request)
+
+    @app.exception_handler(Exception)
+    async def general_exception_handler(request: Request, exc: Exception):
+        return handle_exception(exc, request)
+
+    logger.info("exception_handlers_configured")

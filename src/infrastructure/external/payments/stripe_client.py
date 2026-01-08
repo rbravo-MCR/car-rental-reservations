@@ -7,9 +7,9 @@ from typing import Any
 
 import stripe
 import structlog
-from config.settings import get_settings
+from src.config.settings import get_settings
 
-from application.ports.payment_gateway import PaymentGateway, PaymentResult
+from src.application.ports.payment_gateway import PaymentGateway, PaymentResult
 
 logger = structlog.get_logger()
 settings = get_settings()

@@ -4,9 +4,9 @@ Listar reservas con filtros
 """
 import structlog
 
-from application.dto.reservation_dto import ListReservationsDTO
-from application.ports.unit_of_work import UnitOfWork
-from domain.entities.reservation import Reservation
+from src.application.dto.reservation_dto import ListReservationsDTO
+from src.application.ports.unit_of_work import UnitOfWork
+from src.domain.entities.reservation import Reservation
 
 logger = structlog.get_logger()
 

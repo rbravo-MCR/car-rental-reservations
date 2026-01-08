@@ -13,7 +13,7 @@ Sistema global de reservas de autos con alta concurrencia, arquitectura limpia y
 
 ## 📋 Requisitos
 
-- Python 3.12+
+- Python 3.14
 - Poetry
 - MySQL 8.0+
 - Redis 7+

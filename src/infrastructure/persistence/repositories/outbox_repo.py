@@ -7,7 +7,7 @@ from typing import Any
 from sqlalchemy import and_, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from infrastructure.persistence.models import OutboxEventModel
+from src.infrastructure.persistence.models import OutboxEventModel
 
 
 class SQLAlchemyOutboxRepository:

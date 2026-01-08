@@ -11,7 +11,7 @@ import structlog
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from infrastructure.persistence.models import IdempotencyKeyModel
+from src.infrastructure.persistence.models import IdempotencyKeyModel
 
 logger = structlog.get_logger()
 

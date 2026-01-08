@@ -6,14 +6,14 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from decimal import Decimal
 
-from domain.events.reservation_confirmed import ReservationConfirmed
-from domain.events.reservation_created import ReservationCreated
-from domain.exceptions.reservation_errors import InvalidStateTransitionError
-from domain.value_objects.reservation_status import PaymentStatus, ReservationStatus
+from src.domain.events.reservation_confirmed import ReservationConfirmed
+from src.domain.events.reservation_created import ReservationCreated
+from src.domain.exceptions.reservation_errors import InvalidStateTransitionError
+from src.domain.value_objects.reservation_status import PaymentStatus, ReservationStatus
 
-from domain.entities.contact import Contact, ContactType
-from domain.entities.driver import Driver
-from domain.entities.pricing_item import PricingItem
+from src.domain.entities.contact import Contact, ContactType
+from src.domain.entities.driver import Driver
+from src.domain.entities.pricing_item import PricingItem
 
 
 @dataclass

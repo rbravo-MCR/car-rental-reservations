@@ -6,7 +6,7 @@ from typing import Any
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from infrastructure.persistence.models import AppCustomerModel
+from src.infrastructure.persistence.models import AppCustomerModel
 
 
 class SQLAlchemyCustomerRepository:

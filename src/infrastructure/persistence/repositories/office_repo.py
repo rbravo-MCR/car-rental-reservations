@@ -7,7 +7,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from infrastructure.persistence.models import CityModel, OfficeModel
+from src.infrastructure.persistence.models import CityModel, OfficeModel
 
 
 class SQLAlchemyOfficeRepository:

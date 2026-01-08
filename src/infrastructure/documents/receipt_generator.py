@@ -6,12 +6,12 @@ from datetime import datetime
 from pathlib import Path
 
 import structlog
-from config.settings import get_settings
-from domain.entities.payment import Payment
+from src.config.settings import get_settings
+from src.domain.entities.payment import Payment
 from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML
 
-from domain.entities.reservation import Reservation
+from src.domain.entities.reservation import Reservation
 
 logger = structlog.get_logger()
 settings = get_settings()

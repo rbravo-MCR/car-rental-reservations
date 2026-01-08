@@ -6,7 +6,7 @@ from typing import Any
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from infrastructure.persistence.models import SupplierRequestModel
+from src.infrastructure.persistence.models import SupplierRequestModel
 
 
 class SQLAlchemySupplierRequestRepository:
