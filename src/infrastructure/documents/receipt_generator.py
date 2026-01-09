@@ -2,15 +2,16 @@
 Receipt Generator Implementation
 Genera recibos de pago en PDF usando WeasyPrint
 """
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
 import structlog
-from src.config.settings import get_settings
-from src.domain.entities.payment import Payment
 from jinja2 import Environment, FileSystemLoader
-from weasyprint import HTML
+from weasyprint import HTML  # type: ignore[import-untyped]
 
+from src.config.settings import get_settings
+from src.domain.entities.pyment import Payment
 from src.domain.entities.reservation import Reservation
 
 logger = structlog.get_logger()
@@ -25,7 +26,7 @@ class WeasyPrintReceiptGenerator:
 
     def __init__(self):
         self.templates_dir = Path(__file__).parent / "templates"
-        self.output_dir = Path(settings.receipts_output_dir)
+        self.output_dir = Path(str(settings.receipts_output_dir))
 
         # Crear directorio de salida si no existe
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -68,7 +69,7 @@ class WeasyPrintReceiptGenerator:
             filepath = self.output_dir / filename
 
             # Generar PDF con WeasyPrint
-            HTML(string=html_content).write_pdf(str(filepath))
+            HTML(string=html_content).write_pdf(str(filepath))  # type: ignore[call-arg]
 
             logger.info(
                 "receipt_generated",
@@ -94,7 +95,7 @@ class WeasyPrintReceiptGenerator:
         reservation: Reservation,
         payment: Payment,
         supplier_confirmation: str,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Preparar contexto para el template"""
 
         # Obtener driver principal
@@ -118,7 +119,7 @@ class WeasyPrintReceiptGenerator:
 
             # Información del recibo
             'receipt_number': f"REC-{reservation.reservation_code}",
-            'receipt_date': datetime.utcnow().strftime('%Y-%m-%d'),
+            'receipt_date': datetime.now(UTC).strftime('%Y-%m-%d'),
             'reservation_code': reservation.reservation_code,
             'supplier_confirmation': supplier_confirmation,
 
