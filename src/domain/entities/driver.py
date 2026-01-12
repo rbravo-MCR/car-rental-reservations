@@ -41,7 +41,7 @@ class Driver:
         # Debe tener al menos 21 años (si tenemos fecha de nacimiento)
         if self.date_of_birth:
             from datetime import datetime
-            age = (datetime.utcnow().date() - self.date_of_birth).days // 365
+            age = (datetime.now().year - self.date_of_birth.year)
             if age < 21:
                 return False
 
