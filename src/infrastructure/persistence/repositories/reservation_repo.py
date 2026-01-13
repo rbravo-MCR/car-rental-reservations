@@ -4,7 +4,6 @@ Implementación concreta del repositorio de reservas
 """
 from datetime import datetime
 
-from src.domain.value_objects.reservation_status import PaymentStatus, ReservationStatus
 from sqlalchemy import and_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
@@ -12,6 +11,7 @@ from sqlalchemy.orm import selectinload
 from src.domain.entities.contact import Contact, ContactType
 from src.domain.entities.driver import Driver
 from src.domain.entities.reservation import Reservation
+from src.domain.value_objects.reservation_status import PaymentStatus, ReservationStatus
 from src.infrastructure.persistence.models import (
     ContactModel,
     DriverModel,

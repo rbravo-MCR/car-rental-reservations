@@ -22,7 +22,7 @@ class Driver:
     driver_license_number: str | None = None
     driver_license_country: str | None = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validaciones básicas"""
         if not self.first_name or not self.last_name:
             raise ValueError("Driver must have first and last name")

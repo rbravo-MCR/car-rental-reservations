@@ -11,7 +11,7 @@ from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML  # type: ignore[import-untyped]
 
 from src.config.settings import get_settings
-from src.domain.entities.pyment import Payment
+from src.domain.entities.payment import Payment
 from src.domain.entities.reservation import Reservation
 
 logger = structlog.get_logger()

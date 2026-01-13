@@ -32,7 +32,7 @@ class PricingItem:
     total_price_public: Decimal = Decimal("0.00")
     total_price_supplier: Decimal = Decimal("0.00")
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Convertir a Decimal si es necesario"""
         for field_name in ['quantity', 'unit_price_public', 'unit_price_supplier',
                            'total_price_public', 'total_price_supplier']:

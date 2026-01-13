@@ -2,9 +2,9 @@
 Global Error Handler Middleware
 Maneja todas las excepciones y retorna responses consistentes
 """
-import structlog
 from typing import TYPE_CHECKING
 
+import structlog
 from fastapi import Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
@@ -109,7 +109,7 @@ def handle_exception(exc: Exception, request: Request) -> JSONResponse:
     )
 
 
-def setup_exception_handlers(app: "FastAPI") -> None:
+def setup_exception_handlers(app: FastAPI) -> None:
     """
     Configure global exception handlers for the FastAPI application
 

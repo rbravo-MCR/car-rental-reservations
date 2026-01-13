@@ -4,11 +4,11 @@ Main configuration for Car Rental Reservations API
 """
 from contextlib import asynccontextmanager
 
+import structlog
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import structlog
 
-from src.presentation.api.v1 import reservations, availability
+from src.presentation.api.v1 import availability, reservations
 from src.presentation.middleware.error_handler import setup_exception_handlers
 
 logger = structlog.get_logger()

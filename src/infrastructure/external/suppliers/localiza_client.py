@@ -7,7 +7,6 @@ from decimal import Decimal
 from typing import Any
 
 from src.config.settings import get_settings
-
 from src.infrastructure.external.suppliers.base_supplier import BaseSupplierClient
 
 settings = get_settings()

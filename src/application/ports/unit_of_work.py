@@ -30,7 +30,7 @@ class UnitOfWork(Protocol):
     suppliers: SupplierRepository
     offices: OfficeRepository
 
-    async def __aenter__(self) -> "UnitOfWork":
+    async def __aenter__(self) -> UnitOfWork:
         """Iniciar contexto (transacción)"""
         ...
 

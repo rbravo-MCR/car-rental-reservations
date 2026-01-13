@@ -8,9 +8,12 @@ from enum import Enum
 class ReservationStatus(str, Enum):
     """Estado de la reserva"""
     PENDING = "pending"
+    ON_REQUEST = "on_request"
     CONFIRMED = "confirmed"
-    CANCELLED = "cancelled"
+    IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
+    CANCELLED = "cancelled"
+    NO_SHOW = "no_show"
     FAILED = "failed"
 
 

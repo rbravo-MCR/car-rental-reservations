@@ -20,7 +20,9 @@ from src.infrastructure.persistence.repositories.customer_repo import SQLAlchemy
 from src.infrastructure.persistence.repositories.office_repo import SQLAlchemyOfficeRepository
 from src.infrastructure.persistence.repositories.outbox_repo import SQLAlchemyOutboxRepository
 from src.infrastructure.persistence.repositories.payment_repo import SQLAlchemyPaymentRepository
-from src.infrastructure.persistence.repositories.reservation_repo import SQLAlchemyReservationRepository
+from src.infrastructure.persistence.repositories.reservation_repo import (
+    SQLAlchemyReservationRepository,
+)
 from src.infrastructure.persistence.repositories.supplier_repo import SQLAlchemySupplierRepository
 from src.infrastructure.persistence.repositories.supplier_request_repo import (
     SQLAlchemySupplierRequestRepository,
@@ -139,7 +141,7 @@ class SQLAlchemyUnitOfWork:
         return self._offices
 
 
-async def get_uow() -> AsyncGenerator[SQLAlchemyUnitOfWork, None]:
+async def get_uow() -> AsyncGenerator[SQLAlchemyUnitOfWork]:
     """
     Dependency para FastAPI
     Uso:

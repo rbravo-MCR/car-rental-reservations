@@ -23,7 +23,7 @@ class Contact:
     email: str = ""
     phone: str | None = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validaciones"""
         if not self.full_name:
             raise ValueError("Contact must have a name")

@@ -7,19 +7,19 @@ from datetime import datetime
 from decimal import Decimal
 
 import structlog
-from src.domain.entities.payment import Payment
-from src.domain.exceptions.payment_errors import PaymentFailedError
-from src.domain.exceptions.reservation_errors import ReservationCreationError
-from src.domain.exceptions.supplier_errors import SupplierConfirmationError
-from src.domain.value_objects.reservation_status import PaymentStatus, ReservationStatus
 
 from src.application.dto.reservation_dto import CreateReservationDTO
 from src.application.ports.payment_gateway import PaymentGateway
 from src.application.ports.receipt_generator import ReceiptGenerator
 from src.application.ports.supplier_gateway import SupplierGateway
 from src.application.ports.unit_of_work import UnitOfWork
+from src.domain.entities.payment import Payment
 from src.domain.entities.reservation import Reservation
+from src.domain.exceptions.payment_errors import PaymentFailedError
+from src.domain.exceptions.reservation_errors import ReservationCreationError
+from src.domain.exceptions.supplier_errors import SupplierConfirmationError
 from src.domain.services.reservation_code_generator import ReservationCodeGenerator
+from src.domain.value_objects.reservation_status import PaymentStatus, ReservationStatus
 
 logger = structlog.get_logger()
 
@@ -335,7 +335,7 @@ class CreateReservationUseCase:
                     receipt_url=receipt_url,
                 )
 
-            except (PaymentFailedError, SupplierConfirmationError) as e:
+            except (PaymentFailedError, SupplierConfirmationError):
                 # Errores esperados, rollback y re-raise
                 await self.uow.rollback()
                 raise

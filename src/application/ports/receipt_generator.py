@@ -5,7 +5,6 @@ Genera recibos en PDF
 from typing import Protocol
 
 from src.domain.entities.payment import Payment
-
 from src.domain.entities.reservation import Reservation
 
 

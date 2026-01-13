@@ -2,6 +2,7 @@
 Pricing Calculator Domain Service
 Calcula precios, márgenes, comisiones
 """
+from datetime import datetime
 from decimal import ROUND_HALF_UP, Decimal
 
 
@@ -11,7 +12,7 @@ class PricingCalculator:
     """
 
     @staticmethod
-    def calculate_rental_days(pickup_datetime, dropoff_datetime) -> int:
+    def calculate_rental_days(pickup_datetime: datetime, dropoff_datetime: datetime) -> int:
         """
         Calcula días de renta (redondeado hacia arriba)
 
@@ -138,7 +139,7 @@ class PricingCalculator:
     @staticmethod
     def calculate_total_with_extras(
         base_price: Decimal,
-        extras: list[tuple[Decimal, int]] = None
+        extras: list[tuple[Decimal, int]] | None = None
     ) -> Decimal:
         """
         Calcula total incluyendo extras

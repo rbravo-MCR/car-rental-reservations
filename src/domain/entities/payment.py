@@ -34,7 +34,7 @@ class Payment:
     fee_amount: Decimal | None = None
     net_amount: Decimal | None = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validaciones"""
         if self.amount < 0:
             raise ValueError("Payment amount cannot be negative")
@@ -56,7 +56,7 @@ class Payment:
         status: PaymentStatus,
         method: str | None = None,
         stripe_payment_intent_id: str | None = None,
-    ) -> "Payment":
+    ) -> Payment:
         """Factory method para crear pago"""
         return cls(
             reservation_id=reservation_id,

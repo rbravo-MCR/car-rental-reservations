@@ -5,7 +5,6 @@ Factory pattern para crear instancias de suppliers dinámicamente
 # Importar otros clientes cuando los crees
 # from src.infrastructure.external.suppliers.europcar_client import EuropcarClient
 from src.config.settings import get_settings
-
 from src.infrastructure.external.suppliers.base_supplier import BaseSupplierClient
 from src.infrastructure.external.suppliers.localiza_client import LocalizaClient
 

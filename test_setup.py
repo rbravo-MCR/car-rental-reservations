@@ -59,7 +59,7 @@ def test_config():
         from src.config.settings import get_settings
 
         settings = get_settings()
-        print(f"✅ Settings cargados correctamente")
+        print("✅ Settings cargados correctamente")
         print(f"   - App name: {settings.app_name}")
         print(f"   - Version: {settings.app_version}")
         print(f"   - Database URL: {settings.database_url[:50]}...")
@@ -82,7 +82,7 @@ def test_stripe_client():
         from src.infrastructure.external.payments.stripe_client import StripePaymentGateway
 
         gateway = StripePaymentGateway()
-        print(f"✅ StripePaymentGateway instanciado")
+        print("✅ StripePaymentGateway instanciado")
         print(f"   - API key configurado: {'Sí' if gateway.api_key else 'No (vacío)'}")
         print(f"   - Webhook secret configurado: {'Sí' if gateway.webhook_secret else 'No (vacío)'}")
 
@@ -105,7 +105,7 @@ def test_receipt_generator():
         from src.infrastructure.documents.receipt_generator import WeasyPrintReceiptGenerator
 
         generator = WeasyPrintReceiptGenerator()
-        print(f"✅ WeasyPrintReceiptGenerator instanciado")
+        print("✅ WeasyPrintReceiptGenerator instanciado")
         print(f"   - Templates dir: {generator.templates_dir}")
         print(f"   - Output dir: {generator.output_dir}")
 
@@ -125,9 +125,6 @@ def test_domain_entities():
     print("=" * 50)
 
     try:
-        from src.domain.entities.pyment import Payment
-        from src.domain.entities.reservation import Reservation
-        from src.domain.entities.driver import Driver
 
         print("✅ Payment entity importada")
         print("✅ Reservation entity importada")
@@ -152,7 +149,7 @@ def test_datetime_usage():
         from datetime import UTC, datetime
 
         now = datetime.now(UTC)
-        print(f"✅ datetime.now(UTC) funciona correctamente")
+        print("✅ datetime.now(UTC) funciona correctamente")
         print(f"   - Hora actual UTC: {now}")
 
         return True

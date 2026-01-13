@@ -5,13 +5,14 @@ SQLAlchemy async engine y session factory
 
 from collections.abc import AsyncGenerator
 
-from src.config.settings import get_settings
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
     async_sessionmaker,
     create_async_engine,
 )
 from sqlalchemy.orm import declarative_base
+
+from src.config.settings import get_settings
 
 settings = get_settings()
 
@@ -36,7 +37,7 @@ async_session_factory = async_sessionmaker(
 Base = declarative_base()
 
 
-async def get_session() -> AsyncGenerator[AsyncSession, None]:
+async def get_session() -> AsyncGenerator[AsyncSession]:
     #Dependency para obtener sesión de BD
     async with async_session_factory() as session:
         try:

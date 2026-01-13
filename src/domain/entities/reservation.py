@@ -6,14 +6,13 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from decimal import Decimal
 
+from src.domain.entities.contact import Contact, ContactType
+from src.domain.entities.driver import Driver
+from src.domain.entities.pricing_item import PricingItem
 from src.domain.events.reservation_confirmed import ReservationConfirmed
 from src.domain.events.reservation_created import ReservationCreated
 from src.domain.exceptions.reservation_errors import InvalidStateTransitionError
 from src.domain.value_objects.reservation_status import PaymentStatus, ReservationStatus
-
-from src.domain.entities.contact import Contact, ContactType
-from src.domain.entities.driver import Driver
-from src.domain.entities.pricing_item import PricingItem
 
 
 @dataclass
@@ -133,7 +132,7 @@ class Reservation:
         status: ReservationStatus,
         payment_status: PaymentStatus,
         sales_channel_id: int = 1,
-    ) -> "Reservation":
+    ) -> Reservation:
         """Factory method para crear reserva"""
         reservation = cls(
             reservation_code=reservation_code,
@@ -235,7 +234,7 @@ class Reservation:
     def _can_transition_to(self, new_status: ReservationStatus) -> bool:
         """Validar si puede transicionar a nuevo estado"""
         # Importar aquí para evitar ciclo de importación
-        from domain.services.state_machine import can_transition
+        from src.domain.services.state_machine import can_transition
         return can_transition(self.status, new_status)
 
     def _add_event(self, event) -> None:

@@ -6,6 +6,8 @@ from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
 
+from src.presentation.schemas.reservation_schemas import CreateReservationRequest
+
 
 @dataclass
 class DriverDTO:
@@ -52,8 +54,12 @@ class CreateReservationDTO:
     app_customer_id: int | None = None
     sales_channel_id: int = 1
 
+from src.presentation.schemas.reservation_schemas import CreateReservationRequest
+
+...
+
     @classmethod
-    def from_request(cls, request) -> "CreateReservationDTO":
+    def from_request(cls, request: CreateReservationRequest) -> "CreateReservationDTO":
         """Crear DTO desde request de API"""
         from src.domain.services.pricing_calculator import PricingCalculator
 

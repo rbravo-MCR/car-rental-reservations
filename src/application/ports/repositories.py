@@ -6,7 +6,6 @@ from datetime import datetime
 from typing import Any, Protocol
 
 from src.domain.entities.payment import Payment
-
 from src.domain.entities.reservation import Reservation
 
 
