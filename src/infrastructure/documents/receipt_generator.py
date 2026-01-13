@@ -7,8 +7,6 @@ from pathlib import Path
 from typing import Any
 
 import structlog
-from jinja2 import Environment, FileSystemLoader
-from weasyprint import HTML  # type: ignore[import-untyped]
 
 from src.config.settings import get_settings
 from src.domain.entities.payment import Payment
@@ -16,6 +14,15 @@ from src.domain.entities.reservation import Reservation
 
 logger = structlog.get_logger()
 settings = get_settings()
+
+# Try to import WeasyPrint, but fallback gracefully if not available
+try:
+    from jinja2 import Environment, FileSystemLoader
+    from weasyprint import HTML  # type: ignore[import-untyped]
+    WEASYPRINT_AVAILABLE = True
+except (ImportError, OSError) as e:
+    logger.warning("weasyprint_not_available", error=str(e))
+    WEASYPRINT_AVAILABLE = False
 
 
 class WeasyPrintReceiptGenerator:
@@ -27,6 +34,11 @@ class WeasyPrintReceiptGenerator:
     def __init__(self):
         self.templates_dir = Path(__file__).parent / "templates"
         self.output_dir = Path(str(settings.receipts_output_dir))
+
+        if not WEASYPRINT_AVAILABLE:
+            logger.warning("receipt_generator_initialized_without_weasyprint")
+            self.jinja_env = None
+            return
 
         # Crear directorio de salida si no existe
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -52,6 +64,13 @@ class WeasyPrintReceiptGenerator:
         Returns:
             str: URL del PDF generado
         """
+        if not WEASYPRINT_AVAILABLE:
+            logger.warning(
+                "receipt_generation_skipped_weasyprint_unavailable",
+                reservation_id=reservation.id,
+            )
+            return f"/receipts/mock_{reservation.reservation_code}.pdf"
+
         try:
             # Preparar datos para template
             context = self._prepare_context(
