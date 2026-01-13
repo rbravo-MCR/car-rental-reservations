@@ -18,7 +18,7 @@ logger = structlog.get_logger()
 class StripePaymentGateway(PaymentGateway):
     """Implementación de PaymentGateway con Stripe"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         settings = get_settings()
         self.api_key = settings.stripe_secret_key
         self.webhook_secret = settings.stripe_webhook_secret

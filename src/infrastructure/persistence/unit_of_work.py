@@ -35,7 +35,7 @@ class SQLAlchemyUnitOfWork:
     Maneja transacciones y coordina repositorios
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.session: AsyncSession | None = None
         self._reservations = None
         self._payments = None
@@ -45,7 +45,7 @@ class SQLAlchemyUnitOfWork:
         self._suppliers = None
         self._offices = None
 
-    async def __aenter__(self):
+    async def __aenter__(self) -> "SQLAlchemyUnitOfWork":
         """Iniciar transacción"""
         self.session = async_session_factory()
         return self

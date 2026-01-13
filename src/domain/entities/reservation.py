@@ -5,6 +5,7 @@ Entidad principal del dominio
 from dataclasses import dataclass, field
 from datetime import datetime
 from decimal import Decimal
+from typing import Any
 
 from src.domain.entities.contact import Contact, ContactType
 from src.domain.entities.driver import Driver
@@ -103,7 +104,7 @@ class Reservation:
     # Domain events
     _events: list = field(default_factory=list, init=False, repr=False)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Convertir decimales"""
         decimal_fields = [
             'public_price_total', 'supplier_cost_total', 'discount_total',
@@ -170,7 +171,7 @@ class Reservation:
         email: str,
         phone: str,
         is_primary: bool = True,
-        **kwargs
+        **kwargs: Any
     ) -> Driver:
         """Agregar conductor"""
         driver = Driver(
@@ -237,7 +238,7 @@ class Reservation:
         from src.domain.services.state_machine import can_transition
         return can_transition(self.status, new_status)
 
-    def _add_event(self, event) -> None:
+    def _add_event(self, event: Any) -> None:
         """Agregar evento de dominio"""
         self._events.append(event)
 

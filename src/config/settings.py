@@ -30,6 +30,7 @@ class Settings(BaseSettings):
     # Suppliers
     localiza_api_url: str = ""
     localiza_api_key: str = ""
+    localiza_api_secret: str = ""
 
     # Application
     app_name: str = "Car Rental Reservations"

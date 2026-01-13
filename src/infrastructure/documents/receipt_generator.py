@@ -31,7 +31,7 @@ class WeasyPrintReceiptGenerator:
     Genera PDFs profesionales a partir de templates HTML
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.templates_dir = Path(__file__).parent / "templates"
         self.output_dir = Path(str(settings.receipts_output_dir))
 

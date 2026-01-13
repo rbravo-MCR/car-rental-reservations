@@ -2,7 +2,9 @@
 FastAPI Application Entry Point
 Main configuration for Car Rental Reservations API
 """
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from typing import Any
 
 import structlog
 from fastapi import FastAPI
@@ -15,7 +17,7 @@ logger = structlog.get_logger()
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     """
     Lifecycle manager for FastAPI app
     Handles startup and shutdown events
@@ -66,7 +68,7 @@ def create_app() -> FastAPI:
     )
 
     @app.get("/", tags=["Health"])
-    async def root():
+    async def root() -> dict[str, str]:
         """Root endpoint"""
         return {
             "service": "Car Rental Reservations API",
@@ -75,7 +77,7 @@ def create_app() -> FastAPI:
         }
 
     @app.get("/health", tags=["Health"])
-    async def health_check():
+    async def health_check() -> dict[str, str]:
         """Health check endpoint"""
         return {"status": "healthy"}
 

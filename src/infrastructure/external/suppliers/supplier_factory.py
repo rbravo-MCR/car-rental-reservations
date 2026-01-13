@@ -17,7 +17,7 @@ class SupplierFactory:
     Mapea supplier_id a la implementación correcta
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._suppliers: dict[int, BaseSupplierClient] = {}
 
     async def get_supplier(self, supplier_id: int) -> BaseSupplierClient:

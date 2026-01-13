@@ -19,7 +19,7 @@ class LocalizaClient(BaseSupplierClient):
         super().__init__(
             supplier_id=supplier_id,
             supplier_name="LOCALIZA",
-            base_url=settings.localiza_base_url,
+            base_url=settings.localiza_api_url,
             timeout=30,
         )
         self.api_key = settings.localiza_api_key
