@@ -54,10 +54,6 @@ class CreateReservationDTO:
     app_customer_id: int | None = None
     sales_channel_id: int = 1
 
-from src.presentation.schemas.reservation_schemas import CreateReservationRequest
-
-...
-
     @classmethod
     def from_request(cls, request: CreateReservationRequest) -> "CreateReservationDTO":
         """Crear DTO desde request de API"""
