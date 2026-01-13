@@ -4,6 +4,7 @@ Domain Event: Reservation Created
 from dataclasses import dataclass, field
 from datetime import datetime
 
+
 @dataclass
 class ReservationCreated:
     """

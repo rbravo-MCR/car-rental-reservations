@@ -55,7 +55,7 @@ class CreateReservationDTO:
     sales_channel_id: int = 1
 
     @classmethod
-    def from_request(cls, request: CreateReservationRequest) -> "CreateReservationDTO":
+    def from_request(cls, request: CreateReservationRequest) -> CreateReservationDTO:
         """Crear DTO desde request de API"""
         from src.domain.services.pricing_calculator import PricingCalculator
 
