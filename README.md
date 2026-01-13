@@ -14,7 +14,7 @@ Sistema global de reservas de autos con alta concurrencia, arquitectura limpia y
 ## 📋 Requisitos
 
 - Python 3.14
-- Poetry
+- [uv](https://docs.astral.sh/uv/) (package manager)
 - MySQL 8.0+
 - Redis 7+
 
@@ -24,7 +24,7 @@ Sistema global de reservas de autos con alta concurrencia, arquitectura limpia y
 ```bash
 git clone <repo-url>
 cd car-rental-reservations
-poetry install
+uv sync
 ```
 
 ### 2. Configurar variables de entorno
@@ -40,16 +40,16 @@ CREATE DATABASE car_rental_reservations CHARACTER SET utf8mb4 COLLATE utf8mb4_un
 
 ### 4. Ejecutar migraciones (si usas Alembic)
 ```bash
-poetry run alembic upgrade head
+uv run alembic upgrade head
 ```
 
 ### 5. Ejecutar aplicación
 ```bash
 # Modo desarrollo (con hot-reload)
-poetry run dev
+uv run dev
 
 # O manualmente
-poetry run uvicorn src.presentation.main:app --reload
+uv run uvicorn src.presentation.main:app --reload
 ```
 
 La API estará disponible en: `http://localhost:8000`
@@ -59,25 +59,25 @@ Documentación interactiva: `http://localhost:8000/docs`
 ## 🧪 Testing
 ```bash
 # Todos los tests
-poetry run test
+uv run pytest
 
 # Tests unitarios
-poetry run pytest tests/unit/ -v
+uv run pytest tests/unit/ -v
 
 # Tests de integración
-poetry run pytest tests/integration/ -v
+uv run pytest tests/integration/ -v
 
 # Con coverage
-poetry run pytest --cov=src --cov-report=html
+uv run pytest --cov=src --cov-report=html
 ```
 
 ## 🔄 Workers
 ```bash
 # Worker de outbox (procesa eventos)
-poetry run worker-outbox
+uv run worker-outbox
 
 # Worker de limpieza (idempotency keys)
-poetry run worker-cleanup
+uv run worker-cleanup
 ```
 
 ## 📁 Estructura del Proyecto
@@ -90,6 +90,23 @@ src/
 ├── presentation/        # FastAPI endpoints
 └── workers/             # Background workers
 ```
+
+## 🤖 Trabajando con Claude Code
+
+Este proyecto incluye un archivo `CLAUDE.md` diseñado para [Claude Code](https://claude.ai/code), la herramienta CLI oficial de Anthropic.
+
+**¿Qué es CLAUDE.md?**
+- Documentación de arquitectura interna para instancias futuras de Claude Code
+- Explica patrones de diseño, flujos críticos y decisiones arquitectónicas
+- Complementa este README con detalles técnicos profundos
+
+**Para desarrolladores humanos**: Lee `CLAUDE.md` para entender:
+- Cómo funcionan las capas de Clean Architecture en este proyecto
+- Patrones críticos (Unit of Work, Outbox, Repository, Factory)
+- Flujos de transacciones y manejo de eventos de dominio
+- Detalles de integración con Stripe y proveedores externos
+
+**Para Claude Code**: El archivo `CLAUDE.md` se carga automáticamente al trabajar en este repositorio.
 
 ## 🔑 Variables de Entorno Principales
 
